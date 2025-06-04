@@ -1,11 +1,11 @@
 import React from 'react'
-import '../css/Header.css'
+import '../../css/Header.css'
 
 function Header() {
     return (
-        <header class="bg-gray-900 text-white text-sm">
+        <header class="bg-gray-900 text-white text-lg">
             <div class="max-w-7xl mx-auto px-4">
-                <nav class="flex justify-center h-12">
+                <nav class="flex justify-center h-15 items-center space-x-4 md:space-x-6">
                     <ul class="flex flex-wrap justify-center items-center space-x-4 md:space-x-6 overflow-x-auto whitespace-nowrap py-2">
                         <li>
                             <a href="#" class="hover:text-gray-400">
