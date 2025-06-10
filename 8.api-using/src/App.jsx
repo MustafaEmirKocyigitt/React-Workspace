@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 
@@ -34,7 +34,25 @@ function App() {
     const response = await axios.delete(`${BASE_URL}/users/${userId}`);
     console.log(response.data);
   }
+
+  const getUserById = async (userId) => {
+    const response = await axios.get(`${BASE_URL}/users/${userId}`);
+    return response.data.postId;
+  }
+
+  const getPostById = async (postId) => {
+    const response = await axios.get("https://jsonplaceholder.typicode.com/posts/" + postId);
+    return response.data;
+  }
+
+  const getPost = async () => {
+    const postId = await getUserById(1);
+    const postData = await getPostById(postId);
+    console.log(postData);
+  }
   useEffect(() => {
+    getPost();
+    // getUserById("1");
     // gettAllUsers();
     // gettUserById(3);
     // const newUser = {
@@ -43,8 +61,8 @@ function App() {
     //   password: "123456",
     // }
     // createUser(newUser);
-    updateUser(3, { username: "Mustafa", password: "654321" });
-    deleteUser(4);
+    // updateUser(3, { username: "Mustafa", password: "654321" });
+    // deleteUser(4);
 
   }, []);
   return (
