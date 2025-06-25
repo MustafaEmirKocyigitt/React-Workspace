@@ -8,18 +8,17 @@ import Box from '@mui/material/Box';
 function App() {
   return (
     <div className="App">
-      <h1 className="App-title">Welcome to the TODO APP</h1>
-      <Stack spacing={2}>
+      {/* <h1 className="App-title">Welcome to the TODO APP</h1> */}
+      <div stale={{ width: '100%', diplay: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Stack direction="row" spacing={2} alignItems="center">
           <Box sx={{ width: 500, maxWidth: '100%' }}>
             <TextField fullWidth label="Görev" />
           </Box>
           <TodoCreate />
         </Stack>
-
         <TodoList />
-      </Stack>
-    </div>
+      </div>
+    </div >
 
 
   )
