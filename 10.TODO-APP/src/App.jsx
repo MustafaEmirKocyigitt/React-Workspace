@@ -2,21 +2,35 @@
 import './App.css'
 import TodoCreate from './components/TodoCreate.jsx'
 import TodoList from './components/TodoList.jsx'
-import TextField from '@mui/material/TextField'
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
+import { useState } from 'react';
 function App() {
+
+  const [todos, setTodos] = useState([]);
+
+  const createTodo = (newTodo) => {
+    setTodos([...todos, newTodo]);
+  }
+
+  const removeTodo = (todoId) => {
+    setTodos([...todos.filter(todo => todo.id !== todoId)])
+  }
+  const updateTodo = (newTodo) => {
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id !== newTodo.id) {
+        return todo;
+      }
+      return newTodo;
+    })
+    setTodos([...updatedTodos]);
+  }
   return (
     <div className="App">
-      {/* <h1 className="App-title">Welcome to the TODO APP</h1> */}
       <div stale={{ width: '100%', diplay: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Stack direction="row" spacing={2} alignItems="center">
-          <Box sx={{ width: 500, maxWidth: '100%' }}>
-            <TextField fullWidth label="Görev" />
-          </Box>
-          <TodoCreate />
+          <TodoCreate onCreateTodo={createTodo} />
         </Stack>
-        <TodoList />
+        <TodoList todos={todos} onRemoveTodo={removeTodo} onUpdateTodo={updateTodo} />
       </div>
     </div >
 
