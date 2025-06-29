@@ -9,6 +9,7 @@ import NotFoundPages from './pages/NotFoundPages'
 import Header from './components/Header'
 import Employee from './pages/Employee'
 import Company from './pages/Company'
+import ProductDetails from './components/ProductDetails'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         </Route>
 
         <Route path='/products' element={<Products />} />
+        <Route path='/products-details/:id' element={<ProductDetails />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='*' element={<NotFoundPages />} />
 
