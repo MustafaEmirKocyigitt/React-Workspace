@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from "react-router";
 function Header() {
     return (
-        <div>
-            <Link to="/" >Anasayfa</Link>
-            <Link to="/about" >Hakkında</Link>
-            <Link to="/products" >Ürünler</Link>
-            <Link to="/contact" >İletişim</Link>
+        <div className='header'>  
+            <Link className='link' to="/" >Anasayfa</Link>
+            <Link className='link' to="/about" >Hakkında</Link>
+            <Link className='link' to="/products" >Ürünler</Link>
+            <Link className='link'to="/contact" >İletişim</Link>
         </div>
     )
 }

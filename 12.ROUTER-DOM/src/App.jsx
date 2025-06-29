@@ -6,14 +6,22 @@ import About from './pages/About'
 import Products from './pages/Products'
 import Contact from './pages/Contact'
 import NotFoundPages from './pages/NotFoundPages'
-function App() {
-  const [count, setCount] = useState(0)
+import Header from './components/Header'
+import Employee from './pages/Employee'
+import Company from './pages/Company'
 
+function App() {
   return (
     <div>
+      <Header/>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
+
+        <Route path='/about' element={<About />} >
+          <Route path='empoloyee' element={<Employee/>}/>
+          <Route path='company' element={<Company/>} />
+        </Route>
+
         <Route path='/products' element={<Products />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='*' element={<NotFoundPages />} />
