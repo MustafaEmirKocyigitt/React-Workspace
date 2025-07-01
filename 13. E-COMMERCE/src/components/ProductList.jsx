@@ -7,10 +7,8 @@ import '../css/product.css';
 function ProductList() {
     const dispatch = useDispatch();
     const { products } = useSelector((store) => store.product);
-    console.log(products)
-
     useEffect(() => {
-        dispatch(getAllProducts())
+        dispatch(getAllProducts());
     }, [])
 
     return (
