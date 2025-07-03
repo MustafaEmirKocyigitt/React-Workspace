@@ -1,36 +1,44 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const getBasketFromStorage = () => {
-    if (localStorage.getItem("basket")) {
-        return JSON.parse(localStorage.getItem("basket"))
-    }
-    return [];
-}
+    const data = localStorage.getItem("basket");
+    return data ? JSON.parse(data) : [];
+};
+
+const writeToBasketStorage = (basket) => {
+    localStorage.setItem("basket", JSON.stringify(basket));
+};
+
 const initialState = {
     products: getBasketFromStorage(),
-}
+    drawer: false
+};
 
-const writeFromBasketToStorage = (basket) => {
-    localStorage.setItem("basket", JSON.stringify(basket))
-}
 export const basketSlice = createSlice({
     name: "basket",
     initialState,
     reducers: {
         addToBasket: (state, action) => {
-            const findProduct = state.products && state.products.find((product) => product.id === action.payload.id)
+            const findProduct = state.products.find((product) => product.id === action.payload.id);
+
             if (findProduct) {
+                // Ürün daha önce sepete eklenmişse
+                const extractedProducts = state.products.filter((product) => product.id !== action.payload.id);
+                findProduct.count += action.payload.count;
 
+                state.products = [...extractedProducts, findProduct];
+                writeToBasketStorage(state.products);
             } else {
+                // Ürün sepette yoksa yeni ekle
                 state.products = [...state.products, action.payload];
-                writeFromBasketToStorage(state.products);
-            }
+                writeToBasketStorage(state.products);
+            }// storage güncelle
+        },
+        setDrawer: (state) => {
+            state.drawer = !state.drawer;
         }
-    },
-    extraReducers: (builder) => {
     }
-})
+});
 
-export const { addToBasket } = basketSlice.actions
-
-export default basketSlice.reducer
+export const { addToBasket, setDrawer } = basketSlice.actions;
+export default basketSlice.reducer;

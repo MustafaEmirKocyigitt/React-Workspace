@@ -21,8 +21,11 @@ function ProductDetails() {
         }
     };
     useEffect(() => {
-        getProductById();
-    }, []);
+        if (products.length > 0) {
+            getProductById();
+        }
+    }, [products, id]);
+
     const [count, setCount] = useState(0);
 
     const increment = () => {
@@ -44,6 +47,7 @@ function ProductDetails() {
             count
 
         }
+        console.log("Sepete Gönderilen:", payload);
         dispatch(addToBasket(payload));
     }
     const fakeReviews = [

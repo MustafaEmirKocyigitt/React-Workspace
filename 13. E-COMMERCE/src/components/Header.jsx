@@ -3,10 +3,17 @@ import '../css/header.css'
 import { CiShoppingBasket } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setDrawer } from '../redux/sileces/basketSlice';
+
 
 
 function Header() {
     const navigate = useNavigate();
+    const { products } = useSelector((store) => store.basket);
+    const dispatch = useDispatch();
+
     return (
         <div>
             <nav className="navbar">
@@ -20,7 +27,7 @@ function Header() {
                     <li><a href="#">Hizmetler</a></li>
                     <li><a href="#">İletişim</a></li>
                 </ul>
-                <Badge badgeContent={4} color="primary">
+                <Badge onClick={() => dispatch(setDrawer())} badgeContent={products.length} color="primary">
                     <div className="search-container">
                         <input type="text" placeholder="Ürün Ara..." />
                         <CiShoppingBasket className='icon' />
